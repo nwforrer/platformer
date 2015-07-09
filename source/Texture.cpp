@@ -57,8 +57,8 @@ bool Texture::loadFromFile(SDL_Renderer* renderer, std::string path)
 	return texture_ != NULL;
 }
 
-void Texture::render(int x, int y)
+void Texture::render(int x, int y, double scale)
 {
-	SDL_Rect renderQuad = { x, y, width_, height_ };
+	SDL_Rect renderQuad = { x, y, (int)(scale*width_), (int)(scale*height_) };
 	SDL_RenderCopy(renderer_, texture_, NULL, &renderQuad);
 }

@@ -7,19 +7,19 @@
 	<texture id="5" file="images/players/alienBlue_swim1.png" />
 
 	<object x="50" y="50">
-		<component name="sprite" textureId="1" />
+		<component name="sprite" textureId="1" scale="0.5" />
 	</object>
 	<object x="150" y="150">
-		<component name="sprite" textureId="2" />
+		<component name="sprite" textureId="2" scale="0.5" />
 	</object>
 	<object x="250" y="50">
-		<component name="sprite" textureId="3" />
+		<component name="sprite" textureId="3" scale="0.5" />
 	</object>
 	<object x="350" y="25">
-		<component name="sprite" textureId="1" />
+		<component name="sprite" textureId="1" scale="0.5" />
 	</object>
 	<object x="350" y="200">
-		<component name="sprite" textureId="5" />
+		<component name="sprite" textureId="5" scale="0.5" />
 	</object>
 	<object x="425" y="0">
 		<component name="sprite" textureId="4" />

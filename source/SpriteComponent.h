@@ -9,6 +9,7 @@ class SpriteComponent
 {
 public:
 	SpriteComponent(Texture* texture);
+	SpriteComponent(Texture* texture, double scale);
 
 	void free();
 	
@@ -17,6 +18,7 @@ public:
 
 private:
 	Texture *texture_;
+	double scale_;
 };
 
 #endif

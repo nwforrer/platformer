@@ -171,7 +171,14 @@ bool Game::loadMedia_()
 				rapidxml::xml_attribute<> *pTextureIdAttr = pComponent->first_attribute("textureId");
 				int textureId = atoi(pTextureIdAttr->value());
 				
-				gameObject->init(new SpriteComponent(textures_[textureId]));
+				rapidxml::xml_attribute<> *pScaleAttr = pComponent->first_attribute("scale");
+				double scale = 1.0d;
+				if (pScaleAttr != 0)
+				{
+					scale = atof(pScaleAttr->value());
+				}
+
+				gameObject->init(new SpriteComponent(textures_[textureId], scale));
 			}
 		}
 

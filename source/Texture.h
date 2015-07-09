@@ -15,7 +15,7 @@ public:
 	bool loadFromFile(SDL_Renderer* renderer, std::string path);
 
 	void free();
-	void render(int x, int y);
+	void render(int x, int y, double scale);
 
 	int getWidth() { return width_; }
 	int getHeight() { return height_; }
