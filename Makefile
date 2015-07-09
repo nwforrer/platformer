@@ -5,7 +5,7 @@ OBJS = 	build/Game.o \
 
 CC = g++
 
-CFLAGS  = -std=c++11 -g -Wall -Werror `sdl2-config --cflags`
+CFLAGS  = -std=c++11 -g -Wall -Werror `sdl2-config --cflags` -I./libs/rapidxml-1.13
 
 LDFLAGS = `sdl2-config --libs` -lSDL2 -lSDL2_image -lSDL2_ttf -lSDL2_mixer
 

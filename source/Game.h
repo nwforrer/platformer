@@ -5,6 +5,9 @@
 #include <SDL_image.h>
 
 #include <string>
+#include <stdlib.h>
+#include <vector>
+#include <map>
 
 #include "GameObject.h"
 
@@ -31,8 +34,8 @@ private:
 	SDL_Window* window_;
 	SDL_Renderer* renderer_;
 
-	GameObject gameObject_;
-	Texture texture_;
+	std::vector<GameObject*> gameObjects_;
+	std::map<int, Texture*> textures_;
 
 	int width_;
 	int height_;

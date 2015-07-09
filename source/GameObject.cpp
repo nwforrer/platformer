@@ -24,6 +24,7 @@ void GameObject::free()
 	{
 		sprite_->free();
 		delete sprite_;
+		sprite_ = nullptr;
 	}
 }
 

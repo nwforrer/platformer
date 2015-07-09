@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<document>
+	<texture id="1" file="images/players/alienBlue_stand.png" />
+	<texture id="2" file="images/players/alienBlue_duck.png" />
+	<texture id="3" file="images/players/alienBlue_climb1.png" />
+	<texture id="4" file="images/players/alienBlue_climb2.png" />
+	<texture id="5" file="images/players/alienBlue_swim1.png" />
+
+	<object x="50" y="50">
+		<component name="sprite" textureId="1" />
+	</object>
+	<object x="150" y="150">
+		<component name="sprite" textureId="2" />
+	</object>
+	<object x="250" y="50">
+		<component name="sprite" textureId="3" />
+	</object>
+	<object x="350" y="25">
+		<component name="sprite" textureId="1" />
+	</object>
+	<object x="350" y="200">
+		<component name="sprite" textureId="5" />
+	</object>
+	<object x="425" y="0">
+		<component name="sprite" textureId="4" />
+	</object>
+</document>
