@@ -2,7 +2,11 @@
 #define GAME_H_
 
 #include <SDL.h>
+#include <SDL_image.h>
+
 #include <string>
+
+#include "GameObject.h"
 
 class Game
 {
@@ -21,8 +25,14 @@ public:
 	int getHeight() { return height_; }
 
 private:
+
+	bool loadMedia_();
+
 	SDL_Window* window_;
 	SDL_Renderer* renderer_;
+
+	GameObject gameObject_;
+	Texture texture_;
 
 	int width_;
 	int height_;

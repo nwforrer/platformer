@@ -33,10 +33,19 @@ bool Game::init(std::string title, int width, int height)
 			}
 			else
 			{
-				// TODO: initialize SDL_image, SDL_ttf, SDL_mixer
+				int imgFlags = IMG_INIT_PNG;
+				if (!(IMG_Init(imgFlags) & imgFlags))
+				{
+					// TODO: logging
+					printf("SDL_image could not initialize! SDL_image Error: %s\n", IMG_GetError());
+				}
+				
+				// TODO: initialize SDL_ttf, SDL_mixer
 			}
 		}
 	}
+
+	loadMedia_();
 
 	running_ = true;
 
@@ -50,7 +59,10 @@ void Game::close()
 	window_ = NULL;
 	renderer_ = NULL;
 
-	// TODO: close SDL_image, SDL_ttf, SDL_mixer
+	texture_.free();
+
+	// TODO: close SDL_ttf, SDL_mixer
+	IMG_Quit();
 	SDL_Quit();
 }
 
@@ -83,7 +95,7 @@ void Game::handleEvents()
 
 void Game::update()
 {
-
+	gameObject_.update();
 }
 
 void Game::render()
@@ -91,5 +103,18 @@ void Game::render()
 	SDL_SetRenderDrawColor(renderer_, 0, 0, 0, 0);
 	SDL_RenderClear(renderer_);
 
+	gameObject_.render();
+
 	SDL_RenderPresent(renderer_);
+}
+
+bool Game::loadMedia_()
+{
+	texture_.loadFromFile(renderer_, "images/players/alienBlue_stand.png");
+
+	gameObject_.init(new SpriteComponent(&texture_));
+	gameObject_.x = 50;
+	gameObject_.y = 50;
+
+	return true;
 }

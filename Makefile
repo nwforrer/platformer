@@ -1,4 +1,7 @@
-OBJS = build/Game.o
+OBJS = 	build/Game.o \
+		build/GameObject.o \
+		build/SpriteComponent.o \
+		build/Texture.o
 
 CC = g++
 
