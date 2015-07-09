@@ -6,6 +6,12 @@
 	<texture id="4" file="images/Players/alienBlue_climb2.png" />
 	<texture id="5" file="images/Players/alienBlue_swim1.png" />
 	<texture id="6" file="images/Ground/Dirt/dirtMid.png" />
+	<texture id="7" file="images/Backgrounds/blue_grass.png" />
+
+	<!-- Background -->
+	<object x="0" y="0">
+		<component name="sprite" textureId="7" />
+	</object>
 
 	<object x="50" y="50">
 		<component name="sprite" textureId="1" scale="0.5" />
