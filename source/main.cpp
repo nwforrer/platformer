@@ -6,7 +6,7 @@ int main(int argc, char **argv)
 {
 	Game game;
 
-	if (!game.init("Platformer", 640, 480))
+	if (!game.init("Platformer", 1024, 768))
 	{
 		// TODO: logging
 		printf("Failed to initialize!\n");

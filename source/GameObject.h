@@ -8,6 +8,7 @@ class GameObject
 public:
 	GameObject();
 	GameObject(SpriteComponent* sprite);
+	GameObject(const GameObject& object);
 	~GameObject();
 
 	void init(SpriteComponent* sprite);
@@ -15,6 +16,8 @@ public:
 
 	void update();
 	void render();
+
+	SpriteComponent* getSpriteComponent() const { return sprite_; }
 
 	int x,y;
 	int velocity;

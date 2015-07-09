@@ -8,6 +8,14 @@ GameObject::GameObject(SpriteComponent* sprite)
 : sprite_(sprite)
 {}
 
+GameObject::GameObject(const GameObject& object)
+{
+	sprite_ = new SpriteComponent(*(object.getSpriteComponent()));
+	x = object.x;
+	y = object.y;
+	velocity = object.velocity;
+}
+
 GameObject::~GameObject()
 {
 	free();

@@ -183,6 +183,22 @@ bool Game::loadMedia_()
 		}
 
 		gameObjects_.push_back(gameObject);
+
+		rapidxml::xml_attribute<> *pRepeatXAttr = pObjectNode->first_attribute("repeat-x");
+		if (pRepeatXAttr != 0)
+		{
+			if (strcmp(pRepeatXAttr->value(), "full") == 0)
+			{
+				int spriteWidth = gameObject->getSpriteComponent()->getTexture()->getWidth() * gameObject->getSpriteComponent()->getScale();
+				for (int x = gameObject->x + spriteWidth; x < width_; x += spriteWidth)
+				{
+					GameObject* newGameObject = new GameObject(*gameObject);
+					newGameObject->x = x;
+
+					gameObjects_.push_back(newGameObject);
+				}
+			}
+		}
 	}
 
 	return true;

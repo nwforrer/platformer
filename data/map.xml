@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <document>
-	<texture id="1" file="images/players/alienBlue_stand.png" />
-	<texture id="2" file="images/players/alienBlue_duck.png" />
-	<texture id="3" file="images/players/alienBlue_climb1.png" />
-	<texture id="4" file="images/players/alienBlue_climb2.png" />
-	<texture id="5" file="images/players/alienBlue_swim1.png" />
+	<texture id="1" file="images/Players/alienBlue_stand.png" />
+	<texture id="2" file="images/Players/alienBlue_duck.png" />
+	<texture id="3" file="images/Players/alienBlue_climb1.png" />
+	<texture id="4" file="images/Players/alienBlue_climb2.png" />
+	<texture id="5" file="images/Players/alienBlue_swim1.png" />
+	<texture id="6" file="images/Ground/Dirt/dirtMid.png" />
 
 	<object x="50" y="50">
 		<component name="sprite" textureId="1" scale="0.5" />
@@ -23,5 +24,9 @@
 	</object>
 	<object x="425" y="0">
 		<component name="sprite" textureId="4" />
+	</object>
+
+	<object x="0" y="384" repeat-x="full">
+		<component name="sprite" textureId="6" scale="0.5" />
 	</object>
 </document>
