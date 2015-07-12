@@ -60,59 +60,70 @@ void TileMap::loadMap(std::string file, SDL_Renderer* renderer)
 										source, imageWidth, imageHeight));
 	}
 
-	auto *layerNode = root->first_node("layer");
-	std::string layerName = layerNode->first_attribute("name")->value();
+	std::vector<std::vector<int>> vTileIds;
 
-	std::vector<int> vTileIds;
-	for (auto *tileNode = layerNode->first_node("data")->first_node("tile");
-		tileNode;
-		tileNode = tileNode->next_sibling("tile"))
+	for (auto *layerNode = root->first_node("layer");
+		layerNode;
+		layerNode = layerNode->next_sibling("layer"))
 	{
-		int gid = atoi(tileNode->first_attribute("gid")->value());
+		std::vector<int> vLayerTileIds;
+		std::string layerName = layerNode->first_attribute("name")->value();
 
-		if (gid > 0)
+		for (auto *tileNode = layerNode->first_node("data")->first_node("tile");
+			tileNode;
+			tileNode = tileNode->next_sibling("tile"))
 		{
-			vTileIds.push_back(gid);
+			int gid = atoi(tileNode->first_attribute("gid")->value());
+
+			//if (gid > 0)
+			//{
+				vLayerTileIds.push_back(gid);
+			//}
 		}
+		vTileIds.push_back(vLayerTileIds);
 	}
 
-	for (int tileX = 0;
-		tileX < mapWidth;
-		++tileX)
+	for (std::vector<int> vLayerTileIds : vTileIds)
 	{
-		for (int tileY = 0;
-			tileY < mapHeight;
-			++tileY)
+		for (int tileX = 0;
+			tileX < mapWidth;
+			++tileX)
 		{
-			unsigned int gid = vTileIds[(tileX + (tileY*mapWidth))];
-			//for (auto tileSet : vTileSets_)
-			for (auto i = vTileSets_.rbegin();
-				i != vTileSets_.rend();
-				++i)
+			for (int tileY = 0;
+				tileY < mapHeight;
+				++tileY)
 			{
-				TileSet* tileSet = *i;
-				int numOfCols = tileSet->getImageWidth() / tileSet->getTileWidth();
-				if (gid >= tileSet->getFirstGid())
+				unsigned int gid = vLayerTileIds[(tileX + (tileY*mapWidth))];
+				
+				if (gid == 0)
+					continue;
+
+				for (auto i = vTileSets_.rbegin();
+					i != vTileSets_.rend();
+					++i)
 				{
-					int tileSetCol = (gid-tileSet->getFirstGid()) % numOfCols;
-					int tileSetRow = (gid-tileSet->getFirstGid()) / numOfCols;
+					TileSet* tileSet = *i;
+					int numOfCols = tileSet->getImageWidth() / tileSet->getTileWidth();
+					if (gid >= tileSet->getFirstGid())
+					{
+						int tileSetCol = (gid-tileSet->getFirstGid()) % numOfCols;
+						int tileSetRow = (gid-tileSet->getFirstGid()) / numOfCols;
 
-					// int xOffset = tileSet->getTileWidth() * tileSetCol;
-					// int yOffset = tileSet->getTileHeight() * tileSetRow;
+						Rect pos;
+						pos.x = tileX * tileSet->getTileWidth();
+						pos.y = tileY * tileSet->getTileHeight();
+						pos.w = tileSet->getTileWidth();
+						pos.h = tileSet->getTileHeight();
 
-					Rect pos;
-					pos.x = tileX * tileSet->getTileWidth();
-					pos.y = tileY * tileSet->getTileHeight();
-					pos.w = tileSet->getTileWidth();
-					pos.h = tileSet->getTileHeight();
+						Rect clip;
+						clip.x = tileSet->getTileWidth() * tileSetCol;
+						clip.y = tileSet->getTileHeight() * tileSetRow;
+						clip.w = tileSet->getTileWidth();
+						clip.h = tileSet->getTileHeight();
 
-					Rect clip;
-					clip.x = tileSet->getTileWidth() * tileSetCol;
-					clip.y = tileSet->getTileHeight() * tileSetRow;
-					clip.w = tileSet->getTileWidth();
-					clip.h = tileSet->getTileHeight();
-					vTiles_.push_back(new Tile(tileSet, pos, clip, renderer));
-					break;
+						vTiles_.push_back(new Tile(tileSet, pos, clip, renderer));
+						break;
+					}
 				}
 			}
 		}
