@@ -11,6 +11,15 @@
  </tileset>
  <tileset firstgid="321" name="spritesheet_players" tilewidth="128" tileheight="128">
   <image source="images/Spritesheets/spritesheet_players.png" width="1024" height="2048"/>
+  <tile id="57">
+   <properties>
+    <property name="state" value="walking"/>
+   </properties>
+   <animation>
+    <frame tileid="57" duration="100"/>
+    <frame tileid="73" duration="100"/>
+   </animation>
+  </tile>
  </tileset>
  <layer name="Background" width="8" height="6">
   <data>
@@ -196,7 +205,7 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="323"/>
+   <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -206,7 +215,7 @@
    <tile gid="0"/>
    <tile gid="331"/>
    <tile gid="0"/>
-   <tile gid="0"/>
+   <tile gid="378"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>

@@ -32,3 +32,28 @@ void TileSet::free()
 		texture_ = nullptr;
 	}
 }
+
+void TileSet::addAnimationFrame(int tileId, int duration)
+{
+	vFrameIds_.push_back(tileId);
+	animationDuration_ = duration;
+}
+
+Rect TileSet::getCurrentFrameClip(int currentFrame)
+{
+	Rect clip;
+
+	if (vFrameIds_.size() > 0)
+	{
+		int numOfCols = imageWidth_ / tileWidth_;
+		int tileSetCol = vFrameIds_[currentFrame] % numOfCols;
+		int tileSetRow = vFrameIds_[currentFrame] / numOfCols;
+
+		clip.x = tileWidth_ * tileSetCol;
+		clip.y = tileHeight_ * tileSetRow;
+		clip.w = tileWidth_;
+		clip.h = tileHeight_;
+	}
+
+	return clip;
+}

@@ -3,7 +3,9 @@
 
 #include <SDL.h>
 #include <math.h>
+#include <vector>
 #include "Texture.h"
+#include "Rect.h"
 
 class TileSet
 {
@@ -14,6 +16,10 @@ public:
 
 	void free();
 
+	void addAnimationFrame(int tileId, int duration);
+
+	Rect getCurrentFrameClip(int currentFrame);
+
 	unsigned int getFirstGid() const { return firstgid_; }
 	unsigned int getLastGid() const { return lastgid_; }
 	unsigned int getTileWidth() const { return tileWidth_; }
@@ -22,6 +28,9 @@ public:
 	unsigned int getImageHeight() const { return imageHeight_; }
 	unsigned int getTileAmountWidth() const { return tileAmountWidth_; }
 	Texture* getTexture() const { return texture_; }
+
+	unsigned int getNumFrames() { return vFrameIds_.size(); }
+	unsigned int getAnimationDuration() const { return animationDuration_; }
 	
 private:
 	SDL_Renderer* renderer_;
@@ -35,6 +44,9 @@ private:
 	unsigned int imageHeight_;
 	std::string source_;
 	unsigned int tileAmountWidth_;
+
+	std::vector<int> vFrameIds_;
+	unsigned int animationDuration_;
 };
 
 #endif

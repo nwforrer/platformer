@@ -110,6 +110,8 @@ void Game::update()
 	{
 		gameObject->update();
 	}
+
+	tileMap_.update();
 }
 
 void Game::render()
