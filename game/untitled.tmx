@@ -6,11 +6,11 @@
  <tileset firstgid="65" name="spritesheet_ground" tilewidth="128" tileheight="128">
   <image source="images/Spritesheets/spritesheet_ground.png" width="1024" height="2048"/>
  </tileset>
- <tileset firstgid="193" name="spritesheet_players" tilewidth="128" tileheight="128">
-  <image source="images/Spritesheets/spritesheet_players.png" width="1024" height="2048"/>
- </tileset>
- <tileset firstgid="321" name="spritesheet_enemies" tilewidth="128" tileheight="128">
+ <tileset firstgid="193" name="spritesheet_enemies" tilewidth="128" tileheight="128">
   <image source="images/Spritesheets/spritesheet_enemies.png" width="1024" height="2048"/>
+ </tileset>
+ <tileset firstgid="321" name="spritesheet_players" tilewidth="128" tileheight="128">
+  <image source="images/Spritesheets/spritesheet_players.png" width="1024" height="2048"/>
  </tileset>
  <layer name="Background" width="8" height="6">
   <data>
@@ -132,7 +132,7 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="364"/>
+   <tile gid="236"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -196,6 +196,7 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
+   <tile gid="323"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -203,8 +204,7 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="203"/>
+   <tile gid="331"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
