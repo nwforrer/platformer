@@ -57,8 +57,23 @@ bool Texture::loadFromFile(SDL_Renderer* renderer, std::string path)
 	return texture_ != NULL;
 }
 
-void Texture::render(int x, int y, double scale)
+void Texture::render(int x, int y, double scale, SDL_Rect* clip)
 {
 	SDL_Rect renderQuad = { x, y, (int)(scale*width_), (int)(scale*height_) };
-	SDL_RenderCopy(renderer_, texture_, NULL, &renderQuad);
+
+	if (clip != NULL)
+	{
+		renderQuad.w = clip->w;
+		renderQuad.h = clip->h;
+	}
+
+	SDL_RenderCopy(renderer_, texture_, clip, &renderQuad);
+}
+
+void Texture::render(Rect pos, Rect clip)
+{
+	SDL_Rect renderQuad = { pos.x, pos.y, pos.w, pos.h };
+	SDL_Rect clipQuad = { clip.x, clip.y, clip.w, clip.h };
+
+	SDL_RenderCopy(renderer_, texture_, &clipQuad, &renderQuad);
 }

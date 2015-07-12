@@ -1,6 +1,5 @@
 #include "Game.h"
-
-#include "rapidxml_utils.hpp"
+#include "TileSet.h"
 
 bool Game::init(std::string title, int width, int height)
 {
@@ -123,83 +122,14 @@ void Game::render()
 		gameObject->render();
 	}
 
+	tileMap_.render();
+
 	SDL_RenderPresent(renderer_);
 }
 
 bool Game::loadMedia_()
 {
-	rapidxml::file<> xmlFile("map.xml");
-	rapidxml::xml_document<> doc;
-	doc.parse<0>(xmlFile.data());
-
-	rapidxml::xml_node<> *pRoot = doc.first_node();
-
-	// load all textures into memory
-	for (rapidxml::xml_node<> *pTextureNode=pRoot->first_node("texture"); pTextureNode; pTextureNode=pTextureNode->next_sibling("texture"))
-	{
-		rapidxml::xml_attribute<> *pIdAttr = pTextureNode->first_attribute("id");
-		int id = atoi(pIdAttr->value());
-
-		if (textures_.find(id) == textures_.end())
-		{
-			Texture* texture = new Texture;
-
-			rapidxml::xml_attribute<> *pFileAttr = pTextureNode->first_attribute("file");
-
-			texture->loadFromFile(renderer_, pFileAttr->value());
-			textures_[id] = texture;
-		}
-	}
-
-	// load all game objects
-	for (rapidxml::xml_node<> *pObjectNode=pRoot->first_node("object"); pObjectNode; pObjectNode=pObjectNode->next_sibling("object"))
-	{
-		GameObject* gameObject = new GameObject;
-
-		rapidxml::xml_attribute<> *pXAttr = pObjectNode->first_attribute("x");
-		rapidxml::xml_attribute<> *pYAttr = pObjectNode->first_attribute("y");
-
-		gameObject->x = atoi(pXAttr->value());
-		gameObject->y = atoi(pYAttr->value());
-
-		for (rapidxml::xml_node<> *pComponent=pObjectNode->first_node("component"); pComponent; pComponent=pComponent->next_sibling("component"))
-		{
-			rapidxml::xml_attribute<> *pNameAttr = pComponent->first_attribute("name");
-			if (strcmp(pNameAttr->value(), "sprite") == 0)
-			{
-				// the texture id corresponds to the previously loaded textures
-				rapidxml::xml_attribute<> *pTextureIdAttr = pComponent->first_attribute("textureId");
-				int textureId = atoi(pTextureIdAttr->value());
-				
-				rapidxml::xml_attribute<> *pScaleAttr = pComponent->first_attribute("scale");
-				double scale = 1.0d;
-				if (pScaleAttr != 0)
-				{
-					scale = atof(pScaleAttr->value());
-				}
-
-				gameObject->init(new SpriteComponent(textures_[textureId], scale));
-			}
-		}
-
-		gameObjects_.push_back(gameObject);
-
-		rapidxml::xml_attribute<> *pRepeatXAttr = pObjectNode->first_attribute("repeat-x");
-		if (pRepeatXAttr != 0)
-		{
-			if (strcmp(pRepeatXAttr->value(), "full") == 0)
-			{
-				int spriteWidth = gameObject->getSpriteComponent()->getTexture()->getWidth() * gameObject->getSpriteComponent()->getScale();
-				for (int x = gameObject->x + spriteWidth; x < width_; x += spriteWidth)
-				{
-					GameObject* newGameObject = new GameObject(*gameObject);
-					newGameObject->x = x;
-
-					gameObjects_.push_back(newGameObject);
-				}
-			}
-		}
-	}
+	tileMap_.loadMap("untitled.tmx", renderer_);
 
 	return true;
 }

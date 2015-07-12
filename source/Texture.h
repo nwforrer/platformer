@@ -6,6 +6,8 @@
 
 #include <string>
 
+#include "Rect.h"
+
 class Texture
 {
 public:
@@ -15,7 +17,8 @@ public:
 	bool loadFromFile(SDL_Renderer* renderer, std::string path);
 
 	void free();
-	void render(int x, int y, double scale);
+	void render(int x, int y, double scale, SDL_Rect* clip = NULL);
+	void render(Rect pos, Rect clip);
 
 	int getWidth() { return width_; }
 	int getHeight() { return height_; }

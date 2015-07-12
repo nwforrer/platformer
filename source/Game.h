@@ -10,6 +10,7 @@
 #include <map>
 
 #include "GameObject.h"
+#include "TileMap.h"
 
 class Game
 {
@@ -36,6 +37,8 @@ private:
 
 	std::vector<GameObject*> gameObjects_;
 	std::map<int, Texture*> textures_;
+
+	TileMap tileMap_;
 
 	int width_;
 	int height_;
