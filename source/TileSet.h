@@ -7,6 +7,7 @@
 #include <map>
 #include "Texture.h"
 #include "Rect.h"
+#include "AnimationFrameData.h"
 
 class TileSet
 {
@@ -32,7 +33,7 @@ public:
 
 	unsigned int getNumFrames(int sourceTileId);
 
-	unsigned int getAnimationDuration() const { return animationDuration_; }
+	unsigned int getAnimationDuration(int sourceTileId, int currentFrame);
 	
 private:
 	SDL_Renderer* renderer_;
@@ -47,8 +48,7 @@ private:
 	std::string source_;
 	unsigned int tileAmountWidth_;
 
-	std::map<int, std::vector<int>> vFrameIds_;
-	unsigned int animationDuration_;
+	std::map<int, std::vector<AnimationFrameData>> vFrameIds_;
 };
 
 #endif

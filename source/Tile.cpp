@@ -23,7 +23,7 @@ Tile::~Tile()
 void Tile::update(float timeStep)
 {
 	currentFrameDuration_ += timeStep;
-	if (currentFrameDuration_ >= tileSet_->getAnimationDuration())
+	if (currentFrameDuration_ >= tileSet_->getAnimationDuration(tileId_, currentFrame_))
 	{
 		currentFrameDuration_ = 0;
 

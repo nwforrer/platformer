@@ -13,7 +13,7 @@
   <image source="images/Spritesheets/spritesheet_players.png" width="1024" height="2048"/>
   <tile id="42">
    <animation>
-    <frame tileid="42" duration="500"/>
+    <frame tileid="42" duration="100"/>
     <frame tileid="58" duration="500"/>
    </animation>
   </tile>
