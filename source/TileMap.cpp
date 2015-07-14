@@ -148,11 +148,11 @@ void TileMap::loadMap(std::string file, SDL_Renderer* renderer)
 	}
 }
 
-void TileMap::update()
+void TileMap::update(float timeStep)
 {
 	for (Tile* tile : vTiles_)
 	{
-		tile->update();
+		tile->update(timeStep);
 	}
 }
 

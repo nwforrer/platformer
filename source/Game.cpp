@@ -50,6 +50,9 @@ bool Game::init(std::string title, int width, int height)
 
 	running_ = true;
 
+	gameTimer_.start();
+	countedFrames_ = 0;
+
 	return success;
 }
 
@@ -106,12 +109,22 @@ void Game::handleEvents()
 
 void Game::update()
 {
+	float timeStep = gameTimer_.getDeltaTicks();
+	// float avgFPS = countedFrames_ / (gameTimer_.getTicks() / 1000.0f);
+	// if (avgFPS > 2000000)
+	// {
+	// 	avgFPS = 0;
+	// }
+
+	// std::cout << "FPS: " << avgFPS << '\n';
+
 	for (GameObject* gameObject : gameObjects_)
 	{
 		gameObject->update();
 	}
 
-	tileMap_.update();
+	tileMap_.update(timeStep);
+	// ++countedFrames_;
 }
 
 void Game::render()

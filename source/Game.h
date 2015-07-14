@@ -11,6 +11,7 @@
 
 #include "GameObject.h"
 #include "TileMap.h"
+#include "Timer.h"
 
 class Game
 {
@@ -39,6 +40,9 @@ private:
 	std::map<int, Texture*> textures_;
 
 	TileMap tileMap_;
+
+	Timer gameTimer_;
+	int countedFrames_;
 
 	int width_;
 	int height_;

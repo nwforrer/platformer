@@ -19,7 +19,7 @@ public:
 
 	void loadMap(std::string file, SDL_Renderer* renderer);
 
-	void update();
+	void update(float timeStep);
 	void render();
 
 private:

@@ -15,7 +15,7 @@ public:
 	Tile(TileSet* tileSet, int id, Rect pos, Rect clip, SDL_Renderer* renderer);
 	~Tile();
 
-	void update();
+	void update(float timeStep);
 	void render();
 
 private:

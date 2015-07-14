@@ -20,9 +20,10 @@ Tile::~Tile()
 
 }
 
-void Tile::update()
+void Tile::update(float timeStep)
 {
-	if (++currentFrameDuration_ >= tileSet_->getAnimationDuration())
+	currentFrameDuration_ += timeStep;
+	if (currentFrameDuration_ >= tileSet_->getAnimationDuration())
 	{
 		currentFrameDuration_ = 0;
 
