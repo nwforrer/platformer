@@ -63,6 +63,7 @@ void TileMap::loadMap(std::string file, SDL_Renderer* renderer)
 			tileNode;
 			tileNode = tileNode->next_sibling("tile"))
 		{
+			int animationTileId = atoi(tileNode->first_attribute("id")->value());
 			auto *animationNode = tileNode->first_node("animation");
 			for (auto *frameNode = animationNode->first_node("frame");
 				frameNode;
@@ -70,7 +71,7 @@ void TileMap::loadMap(std::string file, SDL_Renderer* renderer)
 			{
 				int frameTileId = atoi(frameNode->first_attribute("tileid")->value());
 				int frameDuration = atoi(frameNode->first_attribute("duration")->value());
-				tileSet->addAnimationFrame(frameTileId, frameDuration);
+				tileSet->addAnimationFrame(animationTileId, frameTileId, frameDuration);
 			}
 		}
 
@@ -138,7 +139,7 @@ void TileMap::loadMap(std::string file, SDL_Renderer* renderer)
 						clip.w = tileSet->getTileWidth();
 						clip.h = tileSet->getTileHeight();
 
-						vTiles_.push_back(new Tile(tileSet, pos, clip, renderer));
+						vTiles_.push_back(new Tile(tileSet, gid - tileSet->getFirstGid(), pos, clip, renderer));
 						break;
 					}
 				}

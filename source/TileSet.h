@@ -4,6 +4,7 @@
 #include <SDL.h>
 #include <math.h>
 #include <vector>
+#include <map>
 #include "Texture.h"
 #include "Rect.h"
 
@@ -16,9 +17,9 @@ public:
 
 	void free();
 
-	void addAnimationFrame(int tileId, int duration);
+	void addAnimationFrame(int sourceTileId, int tileId, int duration);
 
-	Rect getCurrentFrameClip(int currentFrame);
+	Rect getCurrentFrameClip(int sourceTileId, int currentFrame);
 
 	unsigned int getFirstGid() const { return firstgid_; }
 	unsigned int getLastGid() const { return lastgid_; }
@@ -29,7 +30,8 @@ public:
 	unsigned int getTileAmountWidth() const { return tileAmountWidth_; }
 	Texture* getTexture() const { return texture_; }
 
-	unsigned int getNumFrames() { return vFrameIds_.size(); }
+	unsigned int getNumFrames(int sourceTileId);
+
 	unsigned int getAnimationDuration() const { return animationDuration_; }
 	
 private:
@@ -45,7 +47,7 @@ private:
 	std::string source_;
 	unsigned int tileAmountWidth_;
 
-	std::vector<int> vFrameIds_;
+	std::map<int, std::vector<int>> vFrameIds_;
 	unsigned int animationDuration_;
 };
 

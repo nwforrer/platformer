@@ -12,7 +12,7 @@
 class Tile
 {
 public:
-	Tile(TileSet* tileSet, Rect pos, Rect clip, SDL_Renderer* renderer);
+	Tile(TileSet* tileSet, int id, Rect pos, Rect clip, SDL_Renderer* renderer);
 	~Tile();
 
 	void update();
@@ -20,10 +20,11 @@ public:
 
 private:
 	TileSet* tileSet_;
+	unsigned int tileId_;
 	Rect pos_;
 	Rect clip_;
-	int tileWidth_;
-	int tileHeight_;
+	unsigned int tileWidth_;
+	unsigned int tileHeight_;
 
 	unsigned int currentFrame_;
 	unsigned int currentFrameDuration_;

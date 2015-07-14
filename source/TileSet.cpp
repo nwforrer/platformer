@@ -33,21 +33,28 @@ void TileSet::free()
 	}
 }
 
-void TileSet::addAnimationFrame(int tileId, int duration)
+void TileSet::addAnimationFrame(int sourceTileId, int tileId, int duration)
 {
-	vFrameIds_.push_back(tileId);
+	if (vFrameIds_.count(sourceTileId) == 0)
+	{
+		vFrameIds_.insert(std::pair<int, std::vector<int>>(sourceTileId, std::vector<int>()));
+	}
+
+	vFrameIds_.at(sourceTileId).push_back(tileId);
 	animationDuration_ = duration;
 }
 
-Rect TileSet::getCurrentFrameClip(int currentFrame)
+Rect TileSet::getCurrentFrameClip(int sourceTileId, int currentFrame)
 {
 	Rect clip;
 
-	if (vFrameIds_.size() > 0)
+	if (vFrameIds_.count(sourceTileId) > 0)
 	{
+		std::vector<int> tileFrames = vFrameIds_.at(sourceTileId);
+
 		int numOfCols = imageWidth_ / tileWidth_;
-		int tileSetCol = vFrameIds_[currentFrame] % numOfCols;
-		int tileSetRow = vFrameIds_[currentFrame] / numOfCols;
+		int tileSetCol = tileFrames[currentFrame] % numOfCols;
+		int tileSetRow = tileFrames[currentFrame] / numOfCols;
 
 		clip.x = tileWidth_ * tileSetCol;
 		clip.y = tileHeight_ * tileSetRow;
@@ -56,4 +63,16 @@ Rect TileSet::getCurrentFrameClip(int currentFrame)
 	}
 
 	return clip;
+}
+
+unsigned int TileSet::getNumFrames(int sourceTileId)
+{
+	unsigned int numFrames = 0;
+
+	if (vFrameIds_.count(sourceTileId))
+	{
+		numFrames = vFrameIds_.at(sourceTileId).size();
+	}
+
+	return numFrames;
 }

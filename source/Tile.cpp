@@ -1,8 +1,9 @@
 #include "Tile.h"
 
-Tile::Tile(TileSet* tileSet, Rect pos, Rect clip, SDL_Renderer* renderer)
+Tile::Tile(TileSet* tileSet, int id, Rect pos, Rect clip, SDL_Renderer* renderer)
 {
 	tileSet_ = tileSet;
+	tileId_ = id;
 	tileWidth_ = tileSet_->getTileWidth();
 	tileHeight_ = tileSet_->getTileHeight();
 
@@ -25,16 +26,16 @@ void Tile::update()
 	{
 		currentFrameDuration_ = 0;
 
-		if (++currentFrame_ >= tileSet_->getNumFrames())
+		if (++currentFrame_ >= tileSet_->getNumFrames(tileId_))
 			currentFrame_ = 0;
 	}
 }
 
 void Tile::render()
 {
-	if (tileSet_->getNumFrames() > 0)
+	if (tileSet_->getNumFrames(tileId_) > 0)
 	{
-		Rect currentFrameClip = tileSet_->getCurrentFrameClip(currentFrame_);
+		Rect currentFrameClip = tileSet_->getCurrentFrameClip(tileId_, currentFrame_);
 		tileSet_->getTexture()->render(pos_, currentFrameClip);
 	}
 	else
