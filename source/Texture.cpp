@@ -35,7 +35,7 @@ bool Texture::loadFromFile(SDL_Renderer* renderer, std::string path)
 	if (loadedSurface == NULL)
 	{
 		// TODO: logging
-		printf("Unable to load image %s! SDL_image Error: %s\n", path.c_str(), IMG_GetError());
+		std::cout << "Unable to load image " << path << "! SDL_image Error: " << IMG_GetError() << '\n';
 	}
 	else
 	{
@@ -43,7 +43,7 @@ bool Texture::loadFromFile(SDL_Renderer* renderer, std::string path)
 		if (texture_ == NULL)
 		{
 			// TODO: logging
-			printf("Unable to create texture from %s! SDL Error: %s\n", path.c_str(), SDL_GetError());
+			std::cout << "Unable to create texture from " << path << "! SDL Error: " << SDL_GetError() << '\n';
 		}
 		else
 		{

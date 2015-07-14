@@ -1,4 +1,4 @@
-#include <cstdio>
+#include <iostream>
 
 #include "Game.h"
 
@@ -9,7 +9,7 @@ int main(int argc, char **argv)
 	if (!game.init("Platformer", 1024, 768))
 	{
 		// TODO: logging
-		printf("Failed to initialize!\n");
+		std::cout << "Failed to initialize!\n";;
 	}
 	else
 	{

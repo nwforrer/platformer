@@ -11,7 +11,7 @@ bool Game::init(std::string title, int width, int height)
 	if (SDL_Init(SDL_INIT_VIDEO) < 0)
 	{
 		// TODO: logging
-		printf("SDL could not initialize! SDL_Error: %s\n", SDL_GetError());
+		std::cout << "SDL could not initialize! SDL Error: " << SDL_GetError() << '\n';
 		success = false;
 	}
 	else
@@ -20,7 +20,7 @@ bool Game::init(std::string title, int width, int height)
 		if (window_ == NULL)
 		{
 			// TODO: logging
-			printf("Window could not be create! SDL_Error: %s\n", SDL_GetError());
+			std::cout << "Window could not be created! SDL Error: " << SDL_GetError() << '\n';
 			success = false;
 		}
 		else
@@ -29,7 +29,7 @@ bool Game::init(std::string title, int width, int height)
 			if (renderer_ == NULL)
 			{
 				// TODO: logging
-				printf("Renderer could not be created! SDL Error: %s\n", SDL_GetError());
+				std::cout << "Renderer could not be created! SDL Error: " << SDL_GetError() << '\n';
 				success = false;
 			}
 			else
@@ -38,7 +38,7 @@ bool Game::init(std::string title, int width, int height)
 				if (!(IMG_Init(imgFlags) & imgFlags))
 				{
 					// TODO: logging
-					printf("SDL_image could not initialize! SDL_image Error: %s\n", IMG_GetError());
+					std::cout << "SDL_image could not initialize! SDL_image Error: " << IMG_GetError() << '\n';
 				}
 				
 				// TODO: initialize SDL_ttf, SDL_mixer

@@ -4,8 +4,8 @@
 #include <SDL.h>
 #include <SDL_image.h>
 
+#include <iostream>
 #include <string>
-#include <stdlib.h>
 #include <vector>
 #include <map>
 
